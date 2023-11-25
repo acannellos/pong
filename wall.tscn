@@ -1,17 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://cf2fvehmlthce"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_voiy2"]
-size = Vector2(800, 20)
+size = Vector2(770, 10)
 
 [node name="wall" type="StaticBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(385, 0)
 shape = SubResource("RectangleShape2D_voiy2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-custom_minimum_size = Vector2(800, 20)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = -5.0
+offset_right = 770.0
+offset_bottom = 5.0
+color = Color(0.933333, 0.909804, 0.835294, 1)

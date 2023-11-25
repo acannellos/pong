@@ -1,11 +1,15 @@
-extends Node2D
+extends CanvasLayer
 
-@export_group("screen")
-@export var screen_width: int = 800
-@export var screen_height: int = 600
+var game_state = Enums.GameState.PLAYING
 
 func _ready():
-	get_window().size = Vector2i(screen_width, screen_height)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _process(delta):
 	pass
+
+
+func _unhandled_input(event: InputEvent):
+
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().quit()

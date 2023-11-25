@@ -5,7 +5,6 @@ extends Node2D
 @export var line_spacing: int = 10
 
 func _draw():
-
 	var screen_center_x = get_viewport_rect().size.x / 2
 
 	var current_y = 0
