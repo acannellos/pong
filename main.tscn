@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbj71ojesw06y"]
+[gd_scene load_steps=9 format=3 uid="uid://dbj71ojesw06y"]
 
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_bujwi"]
 [ext_resource type="Script" path="res://Scripts/dotted_line.gd" id="1_ccmwo"]
+[ext_resource type="FontFile" uid="uid://cpm7vigvhsshv" path="res://VT323-Regular.ttf" id="2_k8p2u"]
 [ext_resource type="PackedScene" uid="uid://cf2fvehmlthce" path="res://wall.tscn" id="3_3bctl"]
 [ext_resource type="PackedScene" uid="uid://cpoqlbwhnqr2x" path="res://player.tscn" id="4_kibor"]
 [ext_resource type="Script" path="res://Scripts/player_input.gd" id="4_svr0x"]
 [ext_resource type="PackedScene" uid="uid://cxxkr6s07tlgt" path="res://goal.tscn" id="4_w6ilm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s0l24"]
+font = ExtResource("2_k8p2u")
+font_size = 225
+font_color = Color(0.164706, 0.580392, 0.596078, 1)
 
 [node name="main" type="CanvasLayer"]
 script = ExtResource("1_bujwi")
@@ -16,25 +22,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.521569, 0.6, 0, 1)
+color = Color(0.164706, 0.631373, 0.596078, 1)
 
-[node name="divider" type="Node2D" parent="."]
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Score1" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 2.0
+offset_right = 340.0
+offset_bottom = 230.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_s0l24")
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Score2" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 2.0
+offset_right = 540.0
+offset_bottom = 230.0
+text = "0
+"
+label_settings = SubResource("LabelSettings_s0l24")
+horizontal_alignment = 2
+
+[node name="world" type="Node2D" parent="."]
+
+[node name="ceiling" parent="world" instance=ExtResource("3_3bctl")]
+position = Vector2(0, 5)
+
+[node name="floor" parent="world" instance=ExtResource("3_3bctl")]
+position = Vector2(0, 595)
+
+[node name="LeftGoal" parent="world" instance=ExtResource("4_w6ilm")]
+position = Vector2(-22.5, 300)
+
+[node name="RightGoal" parent="world" instance=ExtResource("4_w6ilm")]
+position = Vector2(822.5, 300)
+
+[node name="divider" type="Node2D" parent="world"]
 script = ExtResource("1_ccmwo")
 line_color = Color(0.933333, 0.909804, 0.835294, 1)
 
-[node name="walls" type="Node2D" parent="."]
+[node name="LeftDivider" type="Node2D" parent="world"]
+script = ExtResource("1_ccmwo")
+line_color = Color(0, 0, 0, 1)
+x_position = 20
+is_centered = false
 
-[node name="ceiling" parent="walls" instance=ExtResource("3_3bctl")]
-position = Vector2(15, 5)
-
-[node name="floor" parent="walls" instance=ExtResource("3_3bctl")]
-position = Vector2(15, 595)
-
-[node name="LeftGoal" parent="walls" instance=ExtResource("4_w6ilm")]
-position = Vector2(7.5, 300)
-
-[node name="RightGoal" parent="walls" instance=ExtResource("4_w6ilm")]
-position = Vector2(792.5, 300)
+[node name="RightDivider" type="Node2D" parent="world"]
+script = ExtResource("1_ccmwo")
+line_color = Color(0, 0, 0, 1)
+x_position = 780
+is_centered = false
 
 [node name="players" type="Node2D" parent="." node_paths=PackedStringArray("player_1", "player_2")]
 script = ExtResource("4_svr0x")
@@ -46,3 +93,6 @@ position = Vector2(20, 300)
 
 [node name="player2" parent="players" instance=ExtResource("4_kibor")]
 position = Vector2(780, 300)
+
+[connection signal="body_entered" from="world/LeftGoal" to="." method="_on_left_goal_body_entered"]
+[connection signal="body_entered" from="world/RightGoal" to="." method="_on_right_goal_body_entered"]
