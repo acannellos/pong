@@ -5,6 +5,8 @@ var game_state = Enums.GameState.PLAYING
 var ball_prefab = preload("res://ball.tscn")
 var ball
 
+@onready var players = $players
+
 var left_score: int = 0
 var right_score: int = 0
 
@@ -30,11 +32,13 @@ func _unhandled_input(event: InputEvent):
 
 func _on_left_goal_body_entered(body):
 	left_score += 1
-	$UI/Score1.text = str(left_score)
+	$UI/ScoreRight.text = str(left_score)
+	players.reset()
 	reset()
 
 
 func _on_right_goal_body_entered(body):
 	right_score += 1
-	$UI/Score2.text = str(right_score)
+	$UI/ScoreLeft.text = str(right_score)
+	players.reset()
 	reset()

@@ -30,7 +30,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Score1" type="Label" parent="UI"]
+[node name="ScoreLeft" type="Label" parent="UI"]
 layout_mode = 0
 offset_left = 250.0
 offset_top = 2.0
@@ -42,7 +42,7 @@ label_settings = SubResource("LabelSettings_s0l24")
 horizontal_alignment = 2
 autowrap_mode = 2
 
-[node name="Score2" type="Label" parent="UI"]
+[node name="ScoreRight" type="Label" parent="UI"]
 layout_mode = 0
 offset_left = 450.0
 offset_top = 2.0
@@ -54,18 +54,6 @@ label_settings = SubResource("LabelSettings_s0l24")
 horizontal_alignment = 2
 
 [node name="world" type="Node2D" parent="."]
-
-[node name="ceiling" parent="world" instance=ExtResource("3_3bctl")]
-position = Vector2(0, 5)
-
-[node name="floor" parent="world" instance=ExtResource("3_3bctl")]
-position = Vector2(0, 595)
-
-[node name="LeftGoal" parent="world" instance=ExtResource("4_w6ilm")]
-position = Vector2(-22.5, 300)
-
-[node name="RightGoal" parent="world" instance=ExtResource("4_w6ilm")]
-position = Vector2(822.5, 300)
 
 [node name="divider" type="Node2D" parent="world"]
 script = ExtResource("1_ccmwo")
@@ -83,10 +71,24 @@ line_color = Color(0, 0, 0, 1)
 x_position = 780
 is_centered = false
 
+[node name="ceiling" parent="world" instance=ExtResource("3_3bctl")]
+position = Vector2(0, 5)
+
+[node name="floor" parent="world" instance=ExtResource("3_3bctl")]
+position = Vector2(0, 595)
+
+[node name="LeftGoal" parent="world" instance=ExtResource("4_w6ilm")]
+position = Vector2(-22.5, 300)
+
+[node name="RightGoal" parent="world" instance=ExtResource("4_w6ilm")]
+position = Vector2(822.5, 300)
+
 [node name="players" type="Node2D" parent="." node_paths=PackedStringArray("player_1", "player_2")]
 script = ExtResource("4_svr0x")
 player_1 = NodePath("player1")
 player_2 = NodePath("player2")
+p1_reset = Vector2(20, 300)
+p2_reset = Vector2(780, 300)
 
 [node name="player1" parent="players" instance=ExtResource("4_kibor")]
 position = Vector2(20, 300)

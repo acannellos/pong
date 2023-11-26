@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpoqlbwhnqr2x"]
+[gd_scene load_steps=3 format=3 uid="uid://cpoqlbwhnqr2x"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_de061"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wx3wx"]
 size = Vector2(10, 80)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6y26b"]
+size = Vector2(12, 4)
+
 [node name="player" type="CharacterBody2D"]
-motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_de061")
+shape = SubResource("RectangleShape2D_wx3wx")
 
 [node name="bg" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(10, 80)
@@ -30,3 +32,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.933333, 0.909804, 0.835294, 1)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -39)
+shape = SubResource("RectangleShape2D_6y26b")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(0, 39)
+shape = SubResource("RectangleShape2D_6y26b")
